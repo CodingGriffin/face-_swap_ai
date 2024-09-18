@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./styles/globals.css";
 
-const api = "https://0fec-102-129-255-7.ngrok-free.app"
+const api = "https://c20f-188-43-136-44.ngrok-free.app"
 
 const App = () => {
   const [image, setImage] = useState("/main.png")
