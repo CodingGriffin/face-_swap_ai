@@ -25,6 +25,9 @@ const App = () => {
     try {
       const response = await fetch(`${api}/face-swap`, {
         method: 'POST',
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        },
         body: formData,
       });
 
