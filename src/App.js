@@ -97,7 +97,7 @@ const App = () => {
         <img className="w-10 h-10" src="/swap.gif" />
         <div className="flex flex-col items-center relative">
           <img className="w-32" src={image} />
-          <div className="absolute flex flex-col items-center -bottom-5">
+          <div className="absolute flex flex-col items-center -bottom-8 md:-bottom-5 sm:-bottom-7">
             <button onClick={handleButtonClick}>
               <img className="w-24" src="/upload.png" />
             </button>
