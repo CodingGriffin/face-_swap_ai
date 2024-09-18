@@ -50,6 +50,9 @@ const App = () => {
     try {
       const response = await fetch(image, {
         method: 'GET',
+        headers: {
+          'ngrok-skip-browser-warning': 'true'
+        }
       });
 
       if (!response.ok) {
