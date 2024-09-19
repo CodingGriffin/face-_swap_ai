@@ -39,6 +39,8 @@ const App = () => {
       console.log('File uploaded successfully!');
       console.log('Response:', result);
       setImage(`${api}/${result.result}`)
+      if(result.result === "result_uploads/SUNWUKONG.png")
+        alert("There's no face in your avatar.. ?")
     } catch (error) {
       console.log('Failed to upload file.');
       console.error('Error:', error);
