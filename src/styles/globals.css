@@ -28,7 +28,8 @@
 }
 
 body {
-  background: black
+  background: black;
+  font-family: "Gobold"
 }
 
 @layer utilities {

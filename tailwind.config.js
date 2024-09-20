@@ -48,6 +48,7 @@ module.exports = {
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        gobold: ["Gobold", "sans-serif"],
         laira: ["Laira", "sans-serif"],
         manrope: ["Manrope", "sans-serif"],
       },
