@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./styles/globals.css";
 
-const api = "http://localhost:8000"
+const api = "https://ebed-188-43-136-44.ngrok-free.app"
 
 const App = () => {
   const [imgSrc, setimgSrc] = useState("")
@@ -113,8 +113,7 @@ const App = () => {
         </div>
         <img className="min-[500px]:w-14 min-[320px]:h-12 md:w-16 md:h-14" src="/swap.gif" />
         <div className="flex flex-col items-center relative">
-
-        {!pending ? (
+          {!pending ? (
             <>
               <img src={imgSrc ? imgSrc : imgUrl} alt="Streamed from FastAPI" className='w-32' />
               <div className="absolute flex flex-col items-center -bottom-5">
