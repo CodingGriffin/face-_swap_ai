@@ -1,11 +1,29 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./styles/globals.css";
 
-const api = "https://e40a-188-43-136-44.ngrok-free.app"
+const api = "http://localhost:8000"
 
 const App = () => {
-  const [image, setImage] = useState("/main.png")
+  const [imgSrc, setimgSrc] = useState("")
+  const [imgUrl, setimgUrl] = useState("/main.png")
+  const [pending, setPending] = useState(false)
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    // Fetch the image from FastAPI backend
+    const fetchImage = async () => {
+      try {
+        const response = await fetch(imgUrl);
+        const blob = await response.blob(); // Convert the response to a blob (binary)
+        const imageObjectURL = URL.createObjectURL(blob); // Create object URL for the blob
+        setimgSrc(imageObjectURL); // Set the image source in state
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+
+    fetchImage();
+  }, [imgUrl]);  // Fetch image when the imgUrl changes
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -18,10 +36,9 @@ const App = () => {
       alert('Please select a file first!');
       return;
     }
-    console.log(file)
     const formData = new FormData();
     formData.append('avatar', file);
-
+    setPending(true)
     try {
       const response = await fetch(`${api}/face-swap`, {
         method: 'POST',
@@ -38,21 +55,22 @@ const App = () => {
       const result = await response.json();
       console.log('File uploaded successfully!');
       console.log('Response:', result);
-      if(result.result === "result_uploads/SUNWUKONG.png") {
+      if (result.result === "result_uploads/SUNWUKONG.png") {
         alert("There's no face in your avatar.. ?")
         return;
       }
-      setImage(`${api}/${result.result}`)
+      setimgUrl(`${api}/${result.result}`)
     } catch (error) {
       console.log('Failed to upload file.');
       console.error('Error:', error);
+    } finally {
+      setPending(false)
     }
   };
-  console.log(image)
-  const handleDownload = async () => {
 
+  const handleDownload = async () => {
     try {
-      const response = await fetch(image, {
+      const response = await fetch(imgUrl, {
         method: 'GET',
         headers: {
           'ngrok-skip-browser-warning': 'true'
@@ -96,13 +114,19 @@ const App = () => {
         </div>
         <img className="w-10 h-10" src="/swap.gif" />
         <div className="flex flex-col items-center relative">
-          <img className="w-32" src={image} />
-          <div className="absolute flex flex-col items-center -bottom-5">
-            <button onClick={handleButtonClick}>
-              <img className="w-24" src="/upload.png" />
-            </button>
-            <div className="text-white text-[8px]">Max. 2 mb - Format in .jpg or .png</div>
-          </div>
+          {!pending ? (
+            <>
+              <img src={imgSrc ? imgSrc : imgUrl} alt="Streamed from FastAPI" className='w-32' />
+              <div className="absolute flex flex-col items-center -bottom-5">
+                <button onClick={handleButtonClick}>
+                  <img className="w-24" src="/upload.png" />
+                </button>
+                <div className="text-white text-[8px]">Max. 2 mb - Format in .jpg or .png</div>
+              </div>
+            </>
+          ) : (
+            <p style={{ color: "white " }}>Loading...</p>
+          )}
 
         </div>
       </div>
