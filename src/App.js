@@ -109,13 +109,13 @@ const App = () => {
       <div className="flex flex-row items-center space-x-5 mb-6">
         <div>
           <img className="absolute -ml-5 md:w-20  min-[500px]:w-16 min-[320px]:w-12" src="/wukong.png" />
-          <img className=" min-[500px]:w-36 min-[320px]:w-32 md:w-44" src="/main.png" />
+          <img className="min-[500px]:w-36 min-[320px]:w-32 md:w-44" src="/main.png" />
         </div>
         <img className="min-[500px]:w-14 min-[320px]:h-12 md:w-16 md:h-14" src="/swap.gif" />
         <div className="flex flex-col items-center relative">
           {!pending ? (
             <>
-              <img src={imgSrc ? imgSrc : imgUrl} alt="Streamed from FastAPI" className='w-32' />
+              <img src={imgSrc ? imgSrc : imgUrl} alt="Streamed from FastAPI" className='min-[500px]:w-36 min-[320px]:w-32 md:w-44' />
               <div className="absolute flex flex-col items-center -bottom-5">
                 <button onClick={handleButtonClick}>
                   <img className="w-24" src="/upload.png" />
