@@ -117,3 +117,11 @@
   font-weight: 900;
   src: url("./fonts/Inter/Inter-Black.woff2") format("woff2");
 }
+
+/* Gobold font */
+@font-face {
+  font-family: "Gobold";
+  src: url("./fonts/Gobold/Gobold-Extra2.ttf.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
