@@ -13,7 +13,12 @@ const App = () => {
     // Fetch the image from FastAPI backend
     const fetchImage = async () => {
       try {
-        const response = await fetch(imgUrl);
+        const response = await fetch(imgUrl, {
+          method: 'GET',
+          headers: {
+            'ngrok-skip-browser-warning': 'true'
+          }
+        });
         const blob = await response.blob(); // Convert the response to a blob (binary)
         const imageObjectURL = URL.createObjectURL(blob); // Create object URL for the blob
         setimgSrc(imageObjectURL); // Set the image source in state
