@@ -11,6 +11,7 @@ const App = () => {
 
   useEffect(() => {
     // Fetch the image from FastAPI backend
+    setPending(true)
     const fetchImage = async () => {
       try {
         const response = await fetch(imgUrl, {
@@ -24,6 +25,8 @@ const App = () => {
         setimgSrc(imageObjectURL); // Set the image source in state
       } catch (error) {
         console.error("Error fetching image:", error);
+      } finally {
+        setPending(false)
       }
     };
 
